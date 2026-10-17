@@ -1,0 +1,64 @@
+.app-shell { min-height: 100svh; isolation: isolate; position: relative; }
+.app-shell::before { content: ''; position: fixed; top: 80px; right: -120px; width: min(74vw, 850px); height: 1000px; background: url('/images/halftone-hands.png') center / contain no-repeat; z-index: -1; opacity: .15; pointer-events: none; }
+.app-shell--soft::before { filter: blur(22px); opacity: .4; }
+.desktop-sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sidebar-width); border-right: 1px solid #b7a99940; padding: 36px 22px; display: flex; flex-direction: column; background: #f9f1e5ed; z-index: 10; }
+.brand { display: inline-flex; align-items: center; font-size: 25px; font-weight: 700; letter-spacing: -.065em; }
+.brand-mark { width: 35px; height: 35px; border-radius: 12px; background: var(--color-ink); color: var(--color-cream); display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; }
+.brand-mark svg { width: 21px; }
+.brand-dot { color: var(--color-coral); }
+.sidebar-tagline { font-size: 12px; line-height: 1.7; color: var(--color-muted); margin: 23px 0 45px 9px; }
+.desktop-sidebar nav { display: grid; gap: 10px; }
+.sidebar-link { display: flex; gap: 13px; align-items: center; min-height: 51px; padding: 12px 15px; border-radius: 17px; font-size: 13px; font-weight: 500; transition: background .2s; }
+.sidebar-link:hover { background: #e9e0d3; }
+.sidebar-link.is-active { background: var(--glass-light); box-shadow: inset 0 1px 2px #5f6f6a44, 0 4px 8px #53423113; }
+.sidebar-chevron { margin-left: auto; opacity: 0; }
+.sidebar-link.is-active .sidebar-chevron { opacity: .7; }
+.sidebar-bottom { margin-top: auto; padding: 28px 10px 0; }
+.preview-chip { display: inline-block; border: 1px solid #c4bda9; border-radius: 20px; font-size: 10px; padding: 5px 10px; letter-spacing: .03em; }
+.sidebar-bottom p { font-size: 11px; color: var(--color-muted); margin: 15px 0; }
+.app-main { margin-left: var(--sidebar-width); padding: 30px clamp(28px, 4vw, 64px) 22px; max-width: 1500px; }
+.app-header { display: flex; align-items: center; gap: 20px; justify-content: space-between; margin-bottom: 40px; min-height: 50px; }
+.menu-button { display: none; }
+.desktop-greeting > span { font-size: 10px; text-transform: uppercase; letter-spacing: .13em; color: var(--color-muted); }
+.desktop-greeting p { font-size: 14px; font-weight: 500; margin-top: 3px; }
+.streak-badge { display: flex; gap: 6px; align-items: center; border-radius: 40px; padding: 8px 16px; min-height: 46px; background: linear-gradient(115deg, #fff1b5, #f3ede0); border: 1px solid var(--color-line); box-shadow: inset 0 2px 3px #63664e40, 0 8px 15px #55403518; color: var(--color-coral); }
+.streak-badge svg { width: 22px; height: 26px; fill: #fff1a9; }
+.streak-badge strong { font: 700 28px/1 var(--font-display); }
+.streak-badge > span { color: var(--color-muted); font-size: 10px; margin-left: 4px; }
+.page-content { outline: none; }
+.preview-footer { text-align: center; font-size: 10px; color: #78695e; padding: 30px 0 8px; }
+.bottom-nav { display: none; }
+.menu-profile { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; }
+.menu-profile p { font-size: 12px; color: var(--color-muted); }
+.menu-links { margin-bottom: 24px; }
+.menu-links a { display: flex; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid #c3b6a944; }
+.menu-links a svg:last-child { margin-left: auto; }
+@media (min-width: 1500px) { .app-main { margin-right: auto; } }
+@media (max-width: 1050px) and (min-width: 768px) { :root { --sidebar-width: 200px; } .desktop-sidebar { padding: 30px 14px; } .app-main { padding-inline: 28px; } .brand { font-size: 23px; } }
+@media (max-width: 767px) {
+  .desktop-sidebar, .desktop-greeting { display: none; }
+  .app-main { margin: 0 auto; padding: 45px 21px 110px; max-width: 540px; min-height: 100svh; }
+  .app-header { margin-bottom: 20px; min-height: 51px; }
+  .menu-button { display: inline-flex; margin-left: 9px; }
+  .app-shell::before { top: 180px; left: 50%; right: auto; width: min(100vw, 540px); height: 740px; transform: translateX(-50%); opacity: .9; background-size: 120% auto; }
+  .app-shell--soft { background: #b6a9a0c4; }
+  .app-shell--soft::before { top: 120px; height: 830px; filter: blur(18px); opacity: .65; }
+  .streak-badge { min-width: 92px; min-height: 50px; justify-content: center; padding: 8px 13px; }
+  .streak-badge strong { font-size: 32px; }
+  .streak-badge svg { width: 27px; height: 31px; }
+  .streak-badge > span { display: none; }
+  .bottom-nav { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; bottom: max(14px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(calc(100% - 42px), 498px); height: 61px; border-radius: 50px; background: linear-gradient(110deg, #b1a39b, #bfb0a5 55%, #b1a39b); border: 1px solid #8e886c; box-shadow: inset 0 3px 6px #49382b40, 0 8px 30px #4d352a22; z-index: 20; }
+  .bottom-nav-item { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px; border-radius: 50px; margin: 1px; min-width: 0; }
+  .bottom-nav-item > svg { width: 25px; height: 25px; stroke-width: 2.5; }
+  .bottom-nav-item > span { font-size: 9px; font-weight: 600; color: #483b34; }
+  .bottom-nav-item.is-active:not(.bottom-nav-camera) { background: linear-gradient(120deg, #bed4df, #b0a5a2); border: 1px solid #cee4ef; box-shadow: inset 1px 3px 4px #4c565a66, 0 3px 9px #49382b22; }
+  .bottom-nav-camera { position: relative; overflow: visible; }
+  .bottom-nav-camera::before { content: ''; position: absolute; width: 73px; height: 78px; border-radius: 50%; top: -22px; left: 50%; transform: translateX(-50%); background: #b7a89d; border-top: 1px solid #8e886c; z-index: -1; box-shadow: inset 0 5px 4px #5f514d30; }
+  .bottom-nav-camera > svg { width: 56px; height: 56px; margin-top: -30px; color: #fff6e7; stroke-width: 1.6; fill: #66554f; filter: drop-shadow(0 -3px 3px #f7eee9); }
+  .bottom-nav-camera > span { position: absolute; bottom: 3px; font-size: 8px; }
+  .bottom-nav-camera.is-active > svg { color: #fff1b5; }
+  .preview-footer { font-size: 9px; padding-top: 22px; }
+  .section-heading { margin-bottom: 22px; }
+  .section-heading h1 { font-size: 31px; }
+  .section-heading .eyebrow { font-size: 9px; }
+}

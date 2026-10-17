@@ -1,0 +1,19 @@
+:root {
+  --color-cream: #f5ecdf;
+  --color-cream-light: #fbf5e9;
+  --color-ink: #463431;
+  --color-text: #5b4f4b;
+  --color-muted: #746863;
+  --color-blue: #cadce4;
+  --color-yellow: #fff1b5;
+  --color-coral: #df7566;
+  --color-line: #bdd0d8;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --glass-light: linear-gradient(125deg, #afc1cbd9 0%, #dbe5e7ed 37%, #f4ece4f5 100%);
+  --glass-dark: linear-gradient(125deg, #bccfd7ef 0%, #d4dfe3ed 29%, #9e9b9eef 67%, #eee5dff5 100%);
+  --glass-warm: linear-gradient(120deg, #f3e8d3 0%, #d2c4bc 33%, #897574 75%, #d8c8c1 100%);
+  --shadow-glass: inset 0 2px 3px #68716d66, inset 0 0 0 1px #e8f2f4b3, 0 12px 24px #49382b24;
+  --radius-card: 38px;
+  --sidebar-width: 238px;
+}

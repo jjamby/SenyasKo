@@ -1,0 +1,68 @@
+.auth-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; padding: 24px; gap: 24px; }
+.auth-story { padding: 35px; border-radius: 30px; position: relative; overflow: hidden; min-height: 700px; background: #e8e6d9; }
+.auth-story::after { content: ''; position: absolute; inset: 33% -18% -30%; background: url('/images/halftone-hands.png') center / contain no-repeat; opacity: .8; pointer-events: none; }
+.auth-story .brand { position: relative; z-index: 1; }
+.auth-story-copy { position: relative; z-index: 1; margin: 66px 0 0 12px; }
+.auth-story-copy h2 { font-size: clamp(38px, 4.8vw, 70px); letter-spacing: -.06em; font-weight: 600; line-height: 1.06; margin-top: 20px; }
+.auth-story-copy h2 em { font-family: Georgia, serif; font-weight: 400; }
+.auth-story-copy p { font-size: 13px; line-height: 1.8; margin-top: 25px; }
+.auth-story-footer { position: absolute; bottom: 25px; left: 47px; font-size: 10px; z-index: 1; color: #f7eee2; background: #493632; border-radius: 30px; padding: 8px 14px; }
+.auth-screen { position: relative; width: 100%; max-width: 530px; margin: auto; padding: 60px 35px; }
+.welcome-page h1 { font-size: clamp(58px, 6vw, 80px); font-weight: 700; letter-spacing: -.075em; color: #61524c; }
+.welcome-heading p { font-size: 13px; color: var(--color-muted); margin-top: 16px; }
+.welcome-actions { display: grid; gap: 22px; margin-top: 75px; }
+.welcome-actions .button { font-size: 24px; min-height: 58px; }
+.welcome-demo { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 13px; font-weight: 600; padding: 8px; margin-top: 5px; }
+.auth-footnote { text-align: center; font-size: 11px; color: var(--color-muted); margin-top: 70px; }
+.mobile-brand { display: none; }
+.auth-back { position: absolute; top: 0; left: 35px; }
+.auth-form-heading { margin: 10px 0 40px; text-align: center; }
+.auth-form-heading h1 { font: 700 40px var(--font-display); color: #62524b; }
+.auth-form-heading p { margin-top: 10px; font-size: 12px; color: var(--color-muted); }
+.auth-fields { display: grid; gap: 18px; }
+.auth-field { border-radius: 50px; border: 1px solid var(--color-line); box-shadow: var(--shadow-glass); background: var(--glass-dark); min-height: 55px; display: flex; align-items: center; gap: 19px; padding: 0 20px; }
+.auth-field:nth-child(even) { background: linear-gradient(120deg, #aabcc6, #c1c9cc 43%, #f5eee5 100%); }
+.auth-field input { flex: 1; width: 100%; min-height: 54px; background: transparent; color: var(--color-ink); font: 600 19px var(--font-display); outline: none; }
+.auth-field:focus-within { outline: 2px solid #79634e; outline-offset: 3px; }
+.auth-field > button { display: flex; padding: 6px; opacity: .8; }
+.forgot-link { display: block; width: fit-content; margin: 8px 12px 0 auto; font: 600 16px var(--font-display); text-decoration: underline; }
+.auth-submit { margin-top: 48px; }
+.auth-submit .button { width: 100%; font: 700 26px var(--font-display); }
+.preview-disclosure { font-size: 10px; text-align: center; line-height: 1.6; max-width: 290px; margin: 18px auto 0; color: #5e5049; background: #f7f0e3d9; border-radius: 10px; padding: 7px 12px; }
+.auth-form .form-error { margin-top: 18px; }
+.auth-switch { text-align: center; font-size: 12px; margin-top: 25px; }
+.auth-switch a { text-decoration: underline; text-underline-offset: 4px; font-weight: 700; }
+.auth-page--reset .auth-form { display: grid; gap: 25px; }
+@media (max-width: 767px) {
+  .auth-layout { display: block; padding: 0; }
+  .auth-story { display: none; }
+  .auth-screen { padding: 0 22px; max-width: 540px; min-height: 100svh; isolation: isolate; overflow: hidden; }
+  .auth-screen::before { content: ''; position: absolute; top: 170px; left: -11%; width: 122%; height: 750px; background: url('/images/halftone-hands.png') center / contain no-repeat; z-index: -1; pointer-events: none; }
+  .welcome-page { min-height: max(800px, 100svh); padding-top: clamp(190px, 29svh, 275px); }
+  .mobile-brand { position: absolute; top: 42px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: -.03em; }
+  .welcome-heading { text-align: center; }
+  .welcome-page h1 { font-size: 54px; letter-spacing: -.07em; }
+  .welcome-heading p { font-size: 11px; margin-top: 10px; }
+  .welcome-actions { margin-top: clamp(175px, 23svh, 235px); gap: 24px; }
+  .welcome-actions .button { font-size: 25px; min-height: 56px; }
+  .welcome-demo { border-radius: 20px; background: #f5ecdfde; width: fit-content; margin: 0 auto; font-size: 12px; padding: 7px 14px; }
+  .auth-footnote { margin: 30px 0 20px; font-size: 10px; }
+  .auth-page { min-height: max(800px, 100svh); padding-top: 190px; padding-bottom: 35px; }
+  .auth-back { top: 48px; left: 31px; }
+  .auth-back svg { width: 29px; height: 29px; }
+  .auth-form-heading { margin: 0 0 50px; }
+  .auth-form-heading h1 { font-size: 30px; }
+  .auth-form-heading p { display: none; }
+  .auth-page--login { padding-top: 205px; }
+  .auth-page--login .auth-form-heading { margin-bottom: 100px; }
+  .auth-field { min-height: 54px; gap: 25px; padding-left: 23px; }
+  .auth-field input { font-size: 18px; }
+  .auth-fields { gap: 18px; }
+  .auth-submit { margin-top: 80px; }
+  .auth-submit .button { min-height: 48px; padding-block: 6px; }
+  .auth-page--signup .auth-submit { margin-top: 78px; }
+  .auth-switch { width: fit-content; margin: 17px auto 0; background: #f7f0e3e0; border-radius: 15px; padding: 5px 10px; font-size: 11px; }
+  .auth-page--reset .auth-form-heading { margin-bottom: 45px; }
+  .auth-page--reset .auth-form-heading p { display: block; }
+}
+@media (max-width: 374px) { .welcome-page h1 { font-size: 48px; } .auth-field { padding-inline: 16px; gap: 15px; } }

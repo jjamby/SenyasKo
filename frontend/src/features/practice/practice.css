@@ -1,0 +1,28 @@
+.practice-page { max-width: 900px; margin: auto; }
+.practice-page .section-heading h1 { max-width: 600px; }
+.practice-card { padding: 22px; }
+.camera-stage { aspect-ratio: 16/10; border-radius: 23px; position: relative; overflow: hidden; background: linear-gradient(135deg, #ddd9ca, #c4cecc); min-height: 260px; isolation: isolate; }
+.camera-stage video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.camera-stage--active video { opacity: 1; }
+.camera-stage video.is-mirrored { transform: scaleX(-1); }
+.camera-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; text-align: center; }
+.camera-symbol { background: #faf2db88; border: 1px solid #fef9e9; border-radius: 50%; padding: 20px; margin-bottom: 23px; }
+.camera-placeholder h2 { font-size: 27px; letter-spacing: -.05em; }
+.camera-placeholder p { font-size: 12px; max-width: 260px; margin-top: 10px; }
+.camera-controls { display: flex; justify-content: center; gap: 14px; margin-top: 20px; align-items: center; }
+.camera-controls .button { font-size: 16px; min-width: 200px; }
+.camera-privacy { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 10px; margin-top: 18px; color: #655b51; }
+.camera-live { position: absolute; top: 15px; left: 15px; display: flex; align-items: center; gap: 7px; background: #fbf4e8e0; border-radius: 30px; padding: 5px 10px; font-size: 10px; }
+.camera-live i { width: 6px; height: 6px; background: #6b9566; border-radius: 50%; }
+.camera-corner { position: absolute; width: 25px; height: 25px; border: solid #fffaf0ba; }
+.camera-corner--tl { top: 18px; left: 18px; border-width: 2px 0 0 2px; border-radius: 7px 0 0 0; }
+.camera-corner--tr { top: 18px; right: 18px; border-width: 2px 2px 0 0; border-radius: 0 7px 0 0; }
+.camera-corner--bl { bottom: 18px; left: 18px; border-width: 0 0 2px 2px; border-radius: 0 0 0 7px; }
+.camera-corner--br { bottom: 18px; right: 18px; border-width: 0 2px 2px 0; border-radius: 0 0 7px 0; }
+.camera-stage--active .camera-corner--tl { display: none; }
+.practice-card .form-error { margin-top: 17px; }
+.practice-note { margin-top: 25px; padding: 22px; background: #f7efdfed; border-radius: 25px; border: 1px solid #d6c9b9; }
+.practice-note h2 { font-size: 20px; margin-bottom: 10px; }
+.practice-note p { font-size: 12px; line-height: 1.8; margin-bottom: 15px; max-width: 600px; }
+.practice-note .text-link { font-size: 12px; }
+@media (max-width: 767px) { .practice-card { padding: 15px; border-radius: 30px; } .camera-stage { aspect-ratio: 3/4; } .camera-placeholder h2 { font-size: 25px; } .camera-controls .button { min-width: 0; flex: 1; padding-inline: 12px; font-size: 14px; } }

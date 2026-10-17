@@ -1,0 +1,14 @@
+.notification-empty { min-height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 15px; }
+.sleeping-bell { width: 270px; max-width: 85%; margin-bottom: 10px; }
+.notification-empty h2 { font: 600 29px var(--font-display); text-transform: uppercase; letter-spacing: -.025em; }
+.notification-empty p { font-size: 12px; margin: 15px 0 25px; color: #64544b; }
+.notification-empty .text-link { font-size: 12px; }
+@media (max-width: 767px) {
+  .notifications-page .section-heading { margin-bottom: 0; }
+  .notifications-page .section-heading h1 { font-size: 25px; }
+  .notifications-page .section-heading .eyebrow { display: none; }
+  .notification-empty { min-height: calc(100svh - 320px); padding-top: 55px; }
+  .sleeping-bell { width: 265px; }
+  .notification-empty h2 { font-size: 24px; }
+  .notification-empty p { max-width: 240px; font-size: 11px; }
+}
