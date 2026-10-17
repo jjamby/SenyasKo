@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Camera, CameraOff, FlipHorizontal2, Hand, ShieldCheck } from 'lucide-react'
+import { usePreview } from '../../app/PreviewContext'
+import { api } from '../../services/api'
 import './practice.css'
 
 export function PracticePage() {
   const [params] = useSearchParams()
+  const { user } = usePreview()
   const video = useRef<HTMLVideoElement>(null)
   const stream = useRef<MediaStream | null>(null)
   const requestId = useRef(0)
@@ -12,6 +15,7 @@ export function PracticePage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [mirrored, setMirrored] = useState(true)
+  const [progressStatus, setProgressStatus] = useState('')
   useEffect(() => () => { requestId.current += 1; stream.current?.getTracks().forEach((track) => track.stop()) }, [])
   function stop() { requestId.current += 1; stream.current?.getTracks().forEach((track) => track.stop()); stream.current = null; if (video.current) video.current.srcObject = null; setActive(false); setLoading(false) }
   async function start() {
@@ -34,5 +38,11 @@ export function PracticePage() {
       else setError(reason instanceof Error ? reason.message : 'The camera couldn’t start. Please try again.')
     } finally { if (id === requestId.current) setLoading(false) }
   }
-  return <div className="practice-page"><div className="section-heading"><div><span className="eyebrow">YOUR SPACE TO TRY</span><h1>{params.get('lesson') || 'Let your hands do the talking.'}</h1></div></div><div className="glass-card practice-card"><div className={`camera-stage ${active ? 'camera-stage--active' : ''}`}><video ref={video} muted playsInline className={mirrored ? 'is-mirrored' : ''} aria-label="Your live camera preview" />{!active && <div className="camera-placeholder"><span className="camera-symbol"><Hand size={60} strokeWidth={1.3} /></span><h2>Ready when you are.</h2><p>Find a little light and give your hands some room.</p></div>}{active && <span className="camera-live"><i /> Live preview</span>}<span className="camera-corner camera-corner--tl" /><span className="camera-corner camera-corner--tr" /><span className="camera-corner camera-corner--bl" /><span className="camera-corner camera-corner--br" /></div><div className="camera-controls"><button className="button button--dark" disabled={loading} onClick={active ? stop : start}>{active ? <CameraOff size={20} /> : <Camera size={20} />}{loading ? 'Opening camera…' : active ? 'Stop camera' : 'Enable camera'}</button><button className="icon-button" aria-label="Mirror camera preview" aria-pressed={mirrored} onClick={() => setMirrored(!mirrored)}><FlipHorizontal2 /></button></div>{error && <p className="form-error" role="alert">{error}</p>}<p className="camera-privacy"><ShieldCheck size={17} /> Camera video stays on your device.</p></div><div className="practice-note"><h2>Practice preview</h2><p>You can check your framing and camera here. Sign recognition, accuracy scores, and corrective feedback are not connected yet.</p><Link className="text-link" to="/collections">Choose a collection ↗</Link></div></div>
+  async function markExplored() {
+    try {
+      await api('/progress/complete', { method: 'POST', body: JSON.stringify({ collection_id: params.get('collection'), lesson: params.get('lesson') }) })
+      setProgressStatus('Lesson marked as explored. Your progress has been saved.')
+    } catch (reason) { setProgressStatus(reason instanceof Error ? reason.message : 'Could not save progress.') }
+  }
+  return <div className="practice-page"><div className="section-heading"><div><span className="eyebrow">YOUR SPACE TO TRY</span><h1>{params.get('lesson') || 'Let your hands do the talking.'}</h1></div></div><div className="glass-card practice-card"><div className={`camera-stage ${active ? 'camera-stage--active' : ''}`}><video ref={video} muted playsInline className={mirrored ? 'is-mirrored' : ''} aria-label="Your live camera preview" />{!active && <div className="camera-placeholder"><span className="camera-symbol"><Hand size={60} strokeWidth={1.3} /></span><h2>Ready when you are.</h2><p>Find a little light and give your hands some room.</p></div>}{active && <span className="camera-live"><i /> Live preview</span>}<span className="camera-corner camera-corner--tl" /><span className="camera-corner camera-corner--tr" /><span className="camera-corner camera-corner--bl" /><span className="camera-corner camera-corner--br" /></div><div className="camera-controls"><button className="button button--dark" disabled={loading} onClick={active ? stop : start}>{active ? <CameraOff size={20} /> : <Camera size={20} />}{loading ? 'Opening camera…' : active ? 'Stop camera' : 'Enable camera'}</button><button className="icon-button" aria-label="Mirror camera preview" aria-pressed={mirrored} onClick={() => setMirrored(!mirrored)}><FlipHorizontal2 /></button></div>{error && <p className="form-error" role="alert">{error}</p>}<p className="camera-privacy"><ShieldCheck size={17} /> Camera video stays on your device.</p></div><div className="practice-note"><h2>Practice preview</h2><p>You can check your framing and camera here. Sign recognition, accuracy scores, and corrective feedback are not connected yet.</p>{user && params.get('collection') && params.get('lesson') && <button className="button button--dark" onClick={markExplored}>Mark lesson explored</button>}{progressStatus && <p className="status-message" role="status">{progressStatus}</p>}<Link className="text-link" to="/collections">Choose a collection ↗</Link></div></div>
 }

@@ -9,5 +9,7 @@ cd frontend
 npm.cmd run dev
 ```
 
-Current milestone: build the frontend from the supplied Figma design.
-The app scaffold is ready; the designed screens and backend are still pending.
+The frontend preview is implemented. A FastAPI backend now handles accounts,
+messaging, drafts, and learner progress. Start the backend separately; see
+[backend setup](backend/README.md). Sign recognition and instructor features
+are still pending.

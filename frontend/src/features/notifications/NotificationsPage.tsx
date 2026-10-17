@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { usePreview } from '../../app/PreviewContext'
+import { api } from '../../services/api'
+import type { Message } from '../../services/api'
 import './notifications.css'
 
 function SleepingBell() {
@@ -6,5 +10,14 @@ function SleepingBell() {
 }
 
 export function NotificationsPage() {
-  return <div className="notifications-page"><div className="section-heading"><div><span className="eyebrow">A LITTLE SPACE TO CATCH UP</span><h1>Notifications</h1></div></div><section className="notification-empty"><SleepingBell /><h2>No notifications yet</h2><p>All quiet for now. Your learning journey is waiting.</p><Link className="text-link" to="/collections">Explore your collections <span aria-hidden="true">↗</span></Link></section></div>
+  const { user } = usePreview()
+  const [unread, setUnread] = useState<Message[]>([])
+  const [error, setError] = useState('')
+  useEffect(() => {
+    if (!user) return
+    let live = true
+    api<Message[]>('/messages').then((items) => { if (live) setUnread(items.filter((item) => item.unread)) }).catch((reason: Error) => { if (live) setError(reason.message) })
+    return () => { live = false }
+  }, [user])
+  return <div className="notifications-page"><div className="section-heading"><div><span className="eyebrow">A LITTLE SPACE TO CATCH UP</span><h1>Notifications</h1></div></div>{error && <p className="form-error" role="alert">{error}</p>}{unread.length ? <section className="notification-messages"><h2>New messages</h2>{unread.map((message) => <Link key={message.id} className="glass-card notification-message" to="/inbox"><strong>{message.sender}</strong><span>{message.subject}</span></Link>)}</section> : <section className="notification-empty"><SleepingBell /><h2>No notifications yet</h2><p>All quiet for now. Your learning journey is waiting.</p><Link className="text-link" to="/collections">Explore your collections <span aria-hidden="true">↗</span></Link></section>}</div>
 }

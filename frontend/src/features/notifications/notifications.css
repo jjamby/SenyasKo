@@ -3,6 +3,9 @@
 .notification-empty h2 { font: 600 29px var(--font-display); text-transform: uppercase; letter-spacing: -.025em; }
 .notification-empty p { font-size: 12px; margin: 15px 0 25px; color: #64544b; }
 .notification-empty .text-link { font-size: 12px; }
+.notification-messages { display: grid; gap: 12px; }
+.notification-messages h2 { font: 600 25px var(--font-display); }
+.notification-message { display: flex; justify-content: space-between; gap: 12px; padding: 20px; }
 @media (max-width: 767px) {
   .notifications-page .section-heading { margin-bottom: 0; }
   .notifications-page .section-heading h1 { font-size: 25px; }

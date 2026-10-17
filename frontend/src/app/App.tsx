@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import { PreviewProvider } from './PreviewContext'
+import { PreviewProvider, usePreview } from './PreviewContext'
 import { AppShell } from '../components/layout/AppShell'
 import { AuthLayout } from '../features/auth/AuthLayout'
 import { WelcomePage } from '../features/auth/WelcomePage'
@@ -24,6 +24,12 @@ function RouteEffects() {
   return null
 }
 
+function ProtectedApp() {
+  const { user, demo, loading } = usePreview()
+  if (loading) return <main className="auth-layout"><p role="status">Loading your account…</p></main>
+  return user || demo ? <AppShell /> : <Navigate to="/login" replace />
+}
+
 export default function App() {
-  return <BrowserRouter><PreviewProvider><RouteEffects /><Routes><Route element={<AuthLayout />}><Route index element={<WelcomePage />} /><Route path="login" element={<AuthPage key="login" mode="login" />} /><Route path="signup" element={<AuthPage key="signup" mode="signup" />} /><Route path="forgot-password" element={<ForgotPasswordPage />} /></Route><Route element={<AppShell />}><Route path="home" element={<HomePage />} /><Route path="collections" element={<CollectionsPage />} /><Route path="collections/:collectionId" element={<CollectionDetailPage />} /><Route path="notifications" element={<NotificationsPage />} /><Route path="inbox" element={<InboxPage />} /><Route path="practice" element={<PracticePage />} /><Route path="*" element={<section className="glass-card search-empty"><h1>A little off the path.</h1><p>We couldn’t find that page.</p><Link to="/home" className="button button--dark">Back to home</Link></section>} /></Route></Routes></PreviewProvider></BrowserRouter>
+  return <BrowserRouter><PreviewProvider><RouteEffects /><Routes><Route element={<AuthLayout />}><Route index element={<WelcomePage />} /><Route path="login" element={<AuthPage key="login" mode="login" />} /><Route path="signup" element={<AuthPage key="signup" mode="signup" />} /><Route path="forgot-password" element={<ForgotPasswordPage />} /></Route><Route element={<ProtectedApp />}><Route path="home" element={<HomePage />} /><Route path="collections" element={<CollectionsPage />} /><Route path="collections/:collectionId" element={<CollectionDetailPage />} /><Route path="notifications" element={<NotificationsPage />} /><Route path="inbox" element={<InboxPage />} /><Route path="practice" element={<PracticePage />} /><Route path="*" element={<section className="glass-card search-empty"><h1>A little off the path.</h1><p>We couldn’t find that page.</p><Link to="/home" className="button button--dark">Back to home</Link></section>} /></Route></Routes></PreviewProvider></BrowserRouter>
 }
