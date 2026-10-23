@@ -4,15 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/prepare-assets.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/prepare-assets.mjs",
     "build": "tsc -b && vite build",
+    "test": "node --test src/features/transcription/*.test.mjs src/features/inbox/*.test.mjs",
+    "test:models": "node scripts/model-smoke.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",
     "@fontsource/dm-sans": "^5.3.0",
+    "@mediapipe/holistic": "^0.5.1675471629",
     "@tailwindcss/vite": "^4.3.3",
+    "@tensorflow/tfjs": "^4.22.0",
     "lucide-react": "^1.58.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
